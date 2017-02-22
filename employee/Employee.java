@@ -1,3 +1,5 @@
+import java.sql.ResultSet;
+
 import db.SqlRunner;
 
 public class Employee {
@@ -33,5 +35,29 @@ public class Employee {
 //
         this.id = SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
+    }
+    public static void all() {
+        String sql = "SELECT * FROM employees;";
+        ResultSet rs = SqlRunner.executeQuery(sql);
+        try {
+            while (rs.next()) {
+                String name = rs.getString("name");
+                Double salary = rs.getDouble("salary");
+                int pay = salary.intValue();
+                System.out.println(name);
+                System.out.println(pay);
+                System.out.println();
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ":" + e.getMessage());
+            System.exit(0);
+        } finally {
+            SqlRunner.closeConnection();
+        }
+
+
+
+
+
     }
 }

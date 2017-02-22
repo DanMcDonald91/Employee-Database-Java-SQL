@@ -1,3 +1,4 @@
+import java.sql.ResultSet;
 import db.SqlRunner;
 
 public class Department {
@@ -17,8 +18,29 @@ public class Department {
     }
 
     public void save() {
-        String sql = String.format("INSERT INTO departments (title) VALUES ('%s');" , this.title);
+        String sql = String.format("INSERT INTO departments (title) VALUES ('%s');", this.title);
         this.id = SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
+    }
+.
+    public static void all() {
+        String sql = "SELECT * FROM departments;";
+        ResultSet rs = SqlRunner.executeQuery(sql);
+        try {
+            while (rs.next()) {
+                String title = rs.getString("title");
+                System.out.println(title);
+                System.out.println();
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " : " + e.getMessage());
+            System.exit(0);
+        } finally {
+            SqlRunner.closeConnection();
+        }
+
+
+
+
     }
 }
