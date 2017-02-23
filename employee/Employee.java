@@ -53,7 +53,11 @@ public class Employee {
             System.exit(0);
         } finally {
             SqlRunner.closeConnection();
-        }
+        }}
+
+    public void deleteEmployee() {
+        String sql ="DELETE FROM employees;";
+        SqlRunner.executeUpdate(sql);
 
 
 

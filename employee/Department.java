@@ -22,7 +22,7 @@ public class Department {
         this.id = SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
-.
+
     public static void all() {
         String sql = "SELECT * FROM departments;";
         ResultSet rs = SqlRunner.executeQuery(sql);
@@ -37,10 +37,25 @@ public class Department {
             System.exit(0);
         } finally {
             SqlRunner.closeConnection();
-        }
+        }}
 
-
+    public void deleteDepartment() {
+        String sql ="DELETE FROM departments;";
+        SqlRunner.executeUpdate(sql);
+    }
 
 
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
